@@ -12,5 +12,7 @@
 </head>
 <body>
 
+<a href="/product/show">add product</a>
+
 </body>
 </html>
