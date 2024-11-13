@@ -2,10 +2,13 @@ package org.example.controllers;
 
 import org.apache.log4j.Logger;
 import org.example.models.ProductDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +23,10 @@ public class ProductController {
         add(new ProductDTO(23,"book",2000,"school"));
     }};
 
-    Logger logger = Logger.getLogger(ProductController.class);
+    @Autowired
+    Logger logger;
+
+   // Logger logger = Logger.getLogger(ProductController.class);
 
 //    @GetMapping("/show")
 //    public String show(ProductDTO productDTO,Model model ){
@@ -35,8 +41,10 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("dto") ProductDTO productDTO){
-
+    public String save(@Valid @ModelAttribute("dto") ProductDTO productDTO, BindingResult result){
+        if(result.hasErrors()){
+            return "product-show";
+        }
         SecureRandom random = new SecureRandom();
         productDTO.setId(random.nextInt(1000));
         list.add(productDTO);

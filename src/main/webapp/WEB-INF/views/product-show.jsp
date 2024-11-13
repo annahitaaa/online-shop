@@ -21,11 +21,14 @@
 <%--</select>--%>
 <%--    <input type="submit" value="add product"/>--%>
 <%--</form>--%>
-
+<h> add your product</h>
 
 <form:form action="/product/save" method="post" modelAttribute="dto">
     Name: <form:input path="name"></form:input><br/><br/>
+    <form:errors path="name" cssStyle="color: red"></form:errors>
     Price: <form:input path="price"></form:input><br/><br/>
+
+    <form:errors path="price" cssStyle="color: red"></form:errors>
     Type: <form:select path="type">
           <form:options items="${dto.validTypes}"></form:options>
             </form:select>
