@@ -17,8 +17,8 @@ public class ProductRestService {
     Logger logger = Logger.getLogger(ProductController.class);
     List<ProductDTO> list = new ArrayList<ProductDTO>()
     {{
-        add(new ProductDTO(110,"glass",1000));
-        add(new ProductDTO(23,"book",2000));
+        add(new ProductDTO(110,"glass",1000,"home"));
+        add(new ProductDTO(23,"book",2000,"school"));
     }};
 
     @GetMapping(value = "/detail/{id}",produces = MediaType.APPLICATION_JSON_VALUE)

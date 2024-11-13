@@ -16,19 +16,26 @@ public class ProductController {
 
     List<ProductDTO> list = new ArrayList<ProductDTO>()
     {{
-        add(new ProductDTO(110,"glass",1000));
-        add(new ProductDTO(23,"book",2000));
+        add(new ProductDTO(110,"glass",1000,"home"));
+        add(new ProductDTO(23,"book",2000,"school"));
     }};
 
     Logger logger = Logger.getLogger(ProductController.class);
 
+//    @GetMapping("/show")
+//    public String show(ProductDTO productDTO,Model model ){
+//        model.addAttribute("productDTO",productDTO);
+//
+//        return "product-show";
+//    }
+
     @GetMapping("/show")
-    public String show(){
+    public String show(@ModelAttribute("dto") ProductDTO productDTO ){
         return "product-show";
     }
 
     @PostMapping("/save")
-    public String save(ProductDTO productDTO){
+    public String save(@ModelAttribute("dto") ProductDTO productDTO){
 
         SecureRandom random = new SecureRandom();
         productDTO.setId(random.nextInt(1000));
@@ -50,7 +57,7 @@ public class ProductController {
         logger.debug(dummy);
         return "product-detail";
     }
-@GetMapping("/detail/{id}")
+    @GetMapping("/detail/{id}")
     public String detailWithPathParam(@PathVariable("id") int id){
         logger.debug(id);
         //TODO: get the product and add it to model and the dispatch it to view
