@@ -12,7 +12,7 @@
 </head>
 <body>
 
-<a href="/product/show">add product</a>
+<a href="/product/show">add product</a><br/><br/>
 <a href="/product/get-all">get products</a>
 
 </body>

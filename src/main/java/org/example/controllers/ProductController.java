@@ -4,10 +4,9 @@ import org.apache.log4j.Logger;
 import org.example.models.ProductDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,11 @@ import java.util.List;
 @RequestMapping("/product")
 public class ProductController {
 
-    List<ProductDTO> list = new ArrayList<>();
+    List<ProductDTO> list = new ArrayList<ProductDTO>()
+    {{
+        add(new ProductDTO(110,"glass",1000));
+        add(new ProductDTO(23,"book",2000));
+    }};
 
     Logger logger = Logger.getLogger(ProductController.class);
 
@@ -26,6 +29,9 @@ public class ProductController {
 
     @PostMapping("/save")
     public String save(ProductDTO productDTO){
+
+        SecureRandom random = new SecureRandom();
+        productDTO.setId(random.nextInt(1000));
         list.add(productDTO);
         logger.debug(productDTO);
         //TODO: must persist dto into database
@@ -40,7 +46,15 @@ public class ProductController {
     }
 
     @GetMapping("/detail")
-    public String detail(){
+    public String detailWithQueryString(@RequestParam("id") int dummy){
+        logger.debug(dummy);
         return "product-detail";
+    }
+@GetMapping("/detail/{id}")
+    public String detailWithPathParam(@PathVariable("id") int id){
+        logger.debug(id);
+        //TODO: get the product and add it to model and the dispatch it to view
+        return "product-detail";
+
     }
 }

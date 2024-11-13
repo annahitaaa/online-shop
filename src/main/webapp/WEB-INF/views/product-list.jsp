@@ -25,7 +25,8 @@
         <tr>
             <td>${productDTO.name}</td>
             <td>${productDTO.price}</td>
-            <td><a href="/product/detail"><img src="/resource/img/product-detail.png"></a></td>
+<%--            <td><a href="/product/detail?id=${productDTO.id}"><img style="width:25px; height: 25px" src="/resource/img/product-detail.png"/></a></td>--%>
+            <td><a href="/product/detail/${productDTO.id}"><img style="width:25px; height: 25px" src="/resource/img/product-detail.png"/></a></td>
             <td>X</td>
             <td>E</td>
         </tr>
