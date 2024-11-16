@@ -20,8 +20,14 @@ import org.springframework.web.servlet.view.JstlView;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
-    @Autowired
-    Environment environment;
+    private final Environment environment;
+
+    public WebConfig(Environment environment) {
+        this.environment = environment;
+    }
+
+//    @Autowired
+//    Environment environment;
 
     @Bean
     public ViewResolver viewResolver(){
@@ -49,5 +55,7 @@ public class WebConfig implements WebMvcConfigurer {
         Class<?> classOnWired= injectionPoint.getMember().getDeclaringClass();
         return Logger.getLogger(classOnWired);
     }
+
+
 
 }

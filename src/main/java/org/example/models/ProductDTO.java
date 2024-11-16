@@ -20,13 +20,10 @@ import java.util.Map;
 public class ProductDTO {
 
     private int id;
-
-    @Size(min=3, message = "name must be more than 3 charachters")
+    @Size(min=3, message = "")
     private String name;
-
-    @Min(value = 1000, message = "price should be greater then 1000")
+    @Min(value = 1000, message = "")
     private int price;
-
     private String type;
     private Map<String, String> validTypes;
 

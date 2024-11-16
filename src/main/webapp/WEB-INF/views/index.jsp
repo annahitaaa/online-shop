@@ -1,3 +1,4 @@
+<%@ taglib prefix="mvc" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: a.aalipour
@@ -8,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title><mvc:message code="index.page.home" text="Home ALT"/></title>
 </head>
 <body>
 
