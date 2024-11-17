@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="mvc" uri="http://www.springframework.org/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: a.aalipour
@@ -21,17 +22,37 @@
 <%--</select>--%>
 <%--    <input type="submit" value="add product"/>--%>
 <%--</form>--%>
-<h> add your product</h>
+<h2> <mvc:message code="product.add"/></h2><br/><br/>
+
+<a href="?lang=en">En</a>
+<a href="?lang=fa">Fa</a>
 
 <form:form action="/product/save" method="post" modelAttribute="dto">
     Name: <form:input path="name"></form:input><br/><br/>
     <form:errors path="name" cssStyle="color: red"></form:errors>
+    <br/>
     Price: <form:input path="price"></form:input><br/><br/>
 
     <form:errors path="price" cssStyle="color: red"></form:errors>
-    Type: <form:select path="type">
+    <br/>
+    Type: <form:select path="type" cssStyle="width: fit-content">
+            <form:option value="---Please Select One Item---"/>
           <form:options items="${dto.validTypes}"></form:options>
             </form:select>
+    <br/>
+    <br/>
+    Color:
+    Black <form:radiobutton path="color" value="black"/>
+    Green <form:radiobutton path="color" value="green"/>
+    Blue <form:radiobutton path="color" value="blue"/>
+    <br/>
+    <br/>
+    sizes:
+    XL: <form:checkbox path="sizes" value="4"/>
+    L: <form:checkbox path="sizes" value="3"/>
+    M: <form:checkbox path="sizes" value="2"/>
+    S: <form:checkbox path="sizes" value="1"/>
+
     <input type="submit" value="add product"/>
 </form:form>
 

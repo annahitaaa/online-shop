@@ -3,15 +3,18 @@ package org.example.controllers;
 import org.apache.log4j.Logger;
 import org.example.models.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Controller
 @RequestMapping("/product")
@@ -25,6 +28,9 @@ public class ProductController {
 
     @Autowired
     Logger logger;
+
+    @Autowired
+    MessageSource messageSource;
 
    // Logger logger = Logger.getLogger(ProductController.class);
 
@@ -41,7 +47,9 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public String save(@Valid @ModelAttribute("dto") ProductDTO productDTO, BindingResult result){
+    public String save(@Valid @ModelAttribute("dto") ProductDTO productDTO, BindingResult result,Locale locale){
+//       String message = messageSource.getMessage("error.name",new Locale(locale.getLanguage()));   *there is a bug here*
+
         if(result.hasErrors()){
             return "product-show";
         }
