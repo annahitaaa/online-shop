@@ -1,4 +1,4 @@
-package org.example.entities;
+package org.example.data.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +21,9 @@ public class Product {
     private String name;
     @Column
     private String price;
+
+    @Column
+    private String color;
 
     private Date createDate;
 

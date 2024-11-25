@@ -1,5 +1,6 @@
 package org.example.controllers;
 
+import lombok.extern.log4j.Log4j;
 import org.apache.log4j.Logger;
 import org.example.models.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/product/rest")
+@Log4j
 public class ProductRestService {
 
-    @Autowired
-    Logger logger;
+
+
 //    Logger logger = Logger.getLogger(ProductController.class);
     List<ProductDTO> list = new ArrayList<ProductDTO>()
     {{
@@ -27,7 +29,7 @@ public class ProductRestService {
 
     @GetMapping(value = "/get/{id}",produces = MediaType.APPLICATION_JSON_VALUE)
     public ProductDTO detailWithPathParam(@PathVariable("id") int id){
-        logger.debug(id);
+        log.debug(id);
         //TODO: get the product and add it to model and the dispatch it to view
         return list.get(0);
     }

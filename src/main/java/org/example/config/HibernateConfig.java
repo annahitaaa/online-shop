@@ -1,6 +1,7 @@
 package org.example.config;
 
 
+import com.zaxxer.hikari.HikariConfig;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AvailableSettings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class HibernateConfig {
     public LocalSessionFactoryBean sessionFactoryBean(DataSource dataSource){
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
-        factoryBean.setPackagesToScan(new String[]{"org.example.entities"});
+        factoryBean.setPackagesToScan(new String[]{"org.example.data.entities"});
         factoryBean.setHibernateProperties(hibernateProperties());
         return factoryBean;
     }
@@ -41,11 +42,28 @@ public class HibernateConfig {
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getRequiredProperty(("database.datasource.driver")));
-        dataSource.setUrl(env.getRequiredProperty("database.datasource.url"));
+        dataSource.setUrl(env.getRequiredProperty("database.datasource.jdbcUrl"));
         dataSource.setUsername(env.getRequiredProperty("database.datasource.username"));
         dataSource.setPassword(env.getRequiredProperty("database.datasource.password"));
         return dataSource;
     }
+
+//        @Bean
+//        public DataSource dataSource() {
+//            HikariConfig datasource = new HikariConfig();
+//            datasource.setJdbcUrl("spring.datasource.hikari.jdbcUrl");
+//            datasource.setUsername("spring.datasource.hikari.username");
+//            datasource.setPassword("spring.datasource.hikari.password");
+//            datasource.setPoolName("spring.datasource.hikari.poolName");
+//            datasource.setMaximumPoolSize(Integer.parseInt("spring.datasource.hikari.maximumPoolSize"));
+//            datasource.setConnectionTimeout(Long.parseLong("spring.datasource.hikari.idleTimeout"));
+//            datasource.setIdleTimeout(Long.parseLong("spring.datasource.hikari.connectionTimeout"));
+//            datasource.setMaxLifetime(Long.parseLong("spring.datasource.hikari.maxLifetime"));
+//            return new HikariDataSource(datasource);
+//            //TODO : there is no HikariDataSource in spring framwork
+//        }
+
+
 
     public Properties hibernateProperties(){
         Properties properties = new Properties();
@@ -53,7 +71,6 @@ public class HibernateConfig {
         properties.put(AvailableSettings.FORMAT_SQL,"true");
         properties.put(AvailableSettings.HBM2DDL_AUTO,"update");
         properties.put(AvailableSettings.DIALECT,"org.hibernate.dialect.MySQL55Dialect");
-
 
         return properties;
 

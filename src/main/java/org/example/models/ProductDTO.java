@@ -1,10 +1,7 @@
 package org.example.models;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.Min;
@@ -40,7 +37,7 @@ public class ProductDTO {
         validTypes = new HashMap<>();
         validTypes.put("1","home");
         validTypes.put("2","school");
-        validTypes.put("3","home");
+        validTypes.put("3","work");
     }
 
     public ProductDTO(int id, String name, int price, String type) {
@@ -49,5 +46,14 @@ public class ProductDTO {
         this.name = name;
         this.price = price;
         this.type = type;
+    }
+
+    public static class CREATE extends ProductDTO{
+
+    }
+
+    @Data
+    public static class DELETE{
+        private int id;
     }
 }

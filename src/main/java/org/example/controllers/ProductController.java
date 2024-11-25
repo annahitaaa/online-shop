@@ -1,45 +1,26 @@
 package org.example.controllers;
 
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
 import org.apache.log4j.Logger;
+import org.example.data.entities.ProductDAO;
 import org.example.models.ProductDTO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
+import org.example.services.ProductService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.security.SecureRandom;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 @Controller
 @RequestMapping("/product")
+@Log4j
+@AllArgsConstructor
 public class ProductController {
 
-    List<ProductDTO> list = new ArrayList<ProductDTO>()
-    {{
-        add(new ProductDTO(110,"glass",1000,"home"));
-        add(new ProductDTO(23,"book",2000,"school"));
-    }};
-
-    @Autowired
-    Logger logger;
-
-    @Autowired
-    MessageSource messageSource;
-
-   // Logger logger = Logger.getLogger(ProductController.class);
-
-//    @GetMapping("/show")
-//    public String show(ProductDTO productDTO,Model model ){
-//        model.addAttribute("productDTO",productDTO);
-//
-//        return "product-show";
-//    }
+    ProductService productService;
 
     @GetMapping("/show")
     public String show(@ModelAttribute("dto") ProductDTO productDTO ){
@@ -47,37 +28,44 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public String save(@Valid @ModelAttribute("dto") ProductDTO productDTO, BindingResult result,Locale locale){
-//       String message = messageSource.getMessage("error.name",new Locale(locale.getLanguage()));   *there is a bug here*
+    public String save(@Valid @ModelAttribute("dto") ProductDTO.CREATE productDTO, BindingResult result){
 
         if(result.hasErrors()){
             return "product-show";
         }
-        SecureRandom random = new SecureRandom();
-        productDTO.setId(random.nextInt(1000));
-        list.add(productDTO);
-        logger.debug(productDTO);
-        //TODO: must persist dto into database
+
+        productService.save(productDTO);
          return "redirect:/";
     }
 
     @GetMapping("/get-all")
-    public String getAll(Model model){
-        model.addAttribute("list", list);
-        return "product-list";
+    public ModelAndView getAll(ModelAndView modelAndView){
+        modelAndView.setViewName("product-list");
+        List<ProductDTO> productDTOList =  productService.findAll();
+        modelAndView.addObject("list", productDTOList);
+        return modelAndView;
 
     }
 
     @GetMapping("/detail")
     public String detailWithQueryString(@RequestParam("id") int dummy){
-        logger.debug(dummy);
+        log.debug(dummy);
         return "product-detail";
     }
     @GetMapping("/detail/{id}")
     public String detailWithPathParam(@PathVariable("id") int id){
-        logger.debug(id);
+        log .debug(id);
         //TODO: get the product and add it to model and the dispatch it to view
         return "product-detail";
 
     }
+
+    @GetMapping("/delete")
+    public String delete(ProductDTO.DELETE dto){
+
+        productService.delete(dto);
+        return "redirect:/product/get-all";
+
+    }
+
 }

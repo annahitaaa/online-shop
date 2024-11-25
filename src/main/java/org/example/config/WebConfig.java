@@ -1,13 +1,11 @@
 package org.example.config;
 
+import lombok.AllArgsConstructor;
 import org.apache.log4j.Logger;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.InjectionPoint;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.*;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.validation.Validator;
@@ -24,18 +22,13 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
-@ComponentScan("org.example.controllers")
+@ComponentScan(basePackages = {"org.example.controllers", "org.example.services","org.example.data"})
 @EnableWebMvc
+@AllArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
 
-    private final Environment environment;
+  Environment environment;
 
-    public WebConfig(Environment environment) {
-        this.environment = environment;
-    }
-
-//    @Autowired
-//    Environment environment;
 
     @Bean
     public ViewResolver viewResolver(){
@@ -92,6 +85,12 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public LocaleResolver localeResolver(){
         return new CookieLocaleResolver();
+    }
+
+    @Bean
+    public ModelMapper modelMapper(){
+
+        return new ModelMapper();
     }
 
 
