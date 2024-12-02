@@ -1,6 +1,7 @@
-package org.example.data.entities;
+package org.example.data;
 
 
+import org.example.data.entities.Product;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

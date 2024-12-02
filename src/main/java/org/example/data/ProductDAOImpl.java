@@ -1,5 +1,7 @@
-package org.example.data.entities;
+package org.example.data;
 
+import org.example.data.ProductDAO;
+import org.example.data.entities.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;

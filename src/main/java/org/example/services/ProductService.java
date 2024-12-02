@@ -1,8 +1,6 @@
 package org.example.services;
 
-import org.example.data.entities.ProductDAO;
 import org.example.models.ProductDTO;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

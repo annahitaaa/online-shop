@@ -2,8 +2,6 @@ package org.example.controllers;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
-import org.apache.log4j.Logger;
-import org.example.data.entities.ProductDAO;
 import org.example.models.ProductDTO;
 import org.example.services.ProductService;
 import org.springframework.stereotype.Controller;
