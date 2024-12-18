@@ -26,6 +26,18 @@ public class BillingAddress extends Audit implements Serializable {
     @NotEmpty
     private String zipCode;
 
+    @NotEmpty
+    private String streetName;
+
+    @NotEmpty
+    private String apartmentNumber;
+
+    @NotEmpty
+    private String country;
+
+    @NotEmpty
+    private String state;
+
     @OneToOne(mappedBy = "billingAddress")
     private Customer customer;
 }

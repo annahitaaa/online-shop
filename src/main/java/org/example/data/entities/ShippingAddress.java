@@ -25,6 +25,19 @@ public class ShippingAddress extends Audit implements Serializable {
     @NotEmpty
     private String zipCode;
 
+    @NotEmpty
+    private String streetName;
+
+    @NotEmpty
+    private String apartmentNumber;
+
+    @NotEmpty
+    private String country;
+
+    @NotEmpty
+    private String state;
+
+
     @OneToOne(mappedBy = "shippingAddress")
     private Customer customer;
 }

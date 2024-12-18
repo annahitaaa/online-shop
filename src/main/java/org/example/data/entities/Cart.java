@@ -27,4 +27,6 @@ public class Cart extends Audit implements Serializable {
     @OneToMany(mappedBy = "cart")
     private List<CartItem> cartItems;
 
+    private double grandTotal;
+
 }

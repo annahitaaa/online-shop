@@ -26,7 +26,7 @@ public class CustomerContact extends Audit implements Serializable {
     private Date date;
 
     @OneToOne
-    @JoinColumn(name="cutomerId")
+    @JoinColumn(name="customerId")
     private Customer customer;
 
 
