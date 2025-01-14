@@ -1,5 +1,6 @@
 package org.example.services;
 
+import org.example.data.entities.Product;
 import org.example.models.ProductDTO;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    void save(ProductDTO dto);
+    void save(Product product);
 
     List<ProductDTO> findAll();
 

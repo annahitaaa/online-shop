@@ -61,6 +61,7 @@
                 <li ><a href="<c:url value="/" />"><spring:message code="home.page"/></a></li>
                 <li><a href="<c:url value="/product/productList/Laptop/1" />"><spring:message code="product.page"/></a></li>
                 <li><a href="<c:url value="/about" />"><spring:message code="about.page"/></a></li>
+                <li><a href="<c:url value="/admin" />"><spring:message code="admin.page"/></a></li>
                 <li><a href="<c:url value="/contact" />"><spring:message code="contact.page"/></a></li>
                
                 

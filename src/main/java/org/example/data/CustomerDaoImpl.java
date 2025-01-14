@@ -26,8 +26,6 @@ public class CustomerDaoImpl implements CustomerDao {
         Session session = sessionFactory.openSession();
         session.save(customer);
         session.close();
-
-
     }
 
     @Override
