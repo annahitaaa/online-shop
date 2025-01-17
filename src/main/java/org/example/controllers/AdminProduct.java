@@ -33,4 +33,12 @@ public class AdminProduct {
         productService.save(product);
          return "redirect:/admin/productManagement/1";
     }
+
+    @ResponseBody
+    @GetMapping("/product/getImage/{productId}")
+    public byte[] getProductImage(@PathVariable("productId") long productId)  {
+            Product product = productService.find(productId);
+            return product.getImg();
+
+    }
 }
