@@ -1,5 +1,5 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ page pageEncoding="utf-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -59,7 +59,7 @@
                 <li><a href="#">  <img src="<c:url value="/resources/images/logo.png"/>" alt="logo" class="logo">     </a></li>
                 <li class=""><a href="#">Green Online Shop</a></li>
                 <li ><a href="<c:url value="/" />"><spring:message code="home.page"/></a></li>
-                <li><a href="<c:url value="/product/productList/Laptop/1" />"><spring:message code="product.page"/></a></li>
+                <li><a href="<c:url value="/product/productList/all/1" />"><spring:message code="product.page"/></a></li>
                 <li><a href="<c:url value="/about" />"><spring:message code="about.page"/></a></li>
                 <li><a href="<c:url value="/admin" />"><spring:message code="admin.page"/></a></li>
                 <li><a href="<c:url value="/contact" />"><spring:message code="contact.page"/></a></li>
@@ -108,7 +108,7 @@
 					    <c:if test="${pageContext.request.userPrincipal.name == null}">
 					          
 					           <li> <a href="<c:url  value="/login"/>"><spring:message code="login.page"/></a>   </li>
-					           <li> <a href="<c:url  value="/customer/register"/>"><spring:message code="register.page"/></a>   </li>
+					           <li> <a href="<c:url  value="/dummy/register"/>"><spring:message code="register.page"/></a>   </li>
 					      </c:if>
 					   
 					    
