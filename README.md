@@ -1,4 +1,4 @@
-# Spring Framwork Project
+# Spring Framework Project
 A simple Spring FrameWork application for a Online-Shop and database integration using Hibernate.
 
 ## Table of Contents
