@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Phone{
 
-    String message() default "{phone}";
+    String message() default "{phoneNumber is not valid}";
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
