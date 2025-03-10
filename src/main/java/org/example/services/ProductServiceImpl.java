@@ -1,16 +1,16 @@
 package org.example.services;
 
 import lombok.extern.log4j.Log4j;
-import org.example.data.entities.Product;
 import org.example.data.ProductDAO;
-import org.example.models.ProductDTO;
+import org.example.data.entities.Product;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
+import java.sql.SQLException;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Transactional
 @Service
@@ -23,13 +23,10 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     ModelMapper mapper;
 
-
     @Override
     public void save(Product product) {
-
-        //Product product = mapper.map(dto, Product.class);
+//        Product product = mapper.map(dto, Product.class);
         productDAO.save(product);
-
     }
 
     @Override
@@ -39,16 +36,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void delete(ProductDTO.DELETE dto) {
+    public void delete(long productId) {
         log.info("");
-        productDAO.delete(dto.getId());
-
+        productDAO.delete(productId);
     }
 
     @Override
     public Product find(long productId) {
-        Product product = productDAO.find(productId);
-        return product;
+        return productDAO.find(productId);
     }
 
     @Override
@@ -56,5 +51,23 @@ public class ProductServiceImpl implements ProductService {
         return null;
     }
 
+    @Override
+    public List<Product> getAllProductByCategory(int pageNumber, String productCategory) {
+        return productDAO.getAllProductByCategory(pageNumber, productCategory);
+    }
 
+    @Override
+    public List<Product> getAllProductByBrandOrModel(int pageNumber, String searchTerm, String productCategory) {
+        return null;
+    }
+
+    @Override
+    public List<Product> getAllProductByBrandOrModelOrCategory(Integer pageNumber, String searchTerm) {
+        return null;
+    }
+
+    @Override
+    public void update(Product product) throws SQLException {
+        productDAO.update(product);
+    }
 }

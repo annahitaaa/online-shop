@@ -18,7 +18,7 @@
 	     
 		<div class="form-layout" >
 		  
-		  <c:url value="/customer/register" var="registerUrl"/>
+		  <c:url value="/dummy/register" var="registerUrl"/>
 		 
 	       <form:form   action="${registerUrl}"   method="post" modelAttribute="customer"     class="form-horizontal"  >
 				

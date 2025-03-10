@@ -6,7 +6,7 @@ public class SpringServletDispatcherConfig extends AbstractAnnotationConfigDispa
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] {WebConfig.class , HibernateConfig.class};
+        return new Class[] {WebConfig.class , HibernateConfig.class, SecurityConfig.class, SecurityInitializer.class};
     }
 
     @Override

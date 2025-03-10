@@ -16,7 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 public class Product extends Audit implements Serializable {
 

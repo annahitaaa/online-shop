@@ -30,21 +30,29 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public Customer findUserByusername(String username) {
-        return null;
+        return (Customer) entityManager.createQuery("from Customer c where c.username =:username").setParameter("username",username).getSingleResult();
     }
 
     @Override
     public List<Customer> findAll() {
-        return null;
+        return entityManager.createQuery("from Customer").getResultList();
     }
 
     @Override
     public Customer findOne(long customerId) {
-        return null;
+        Customer customer = entityManager.find(Customer.class, customerId);
+        entityManager.close();
+        return customer;
     }
 
     @Override
     public Customer findCustomerByUsernameAndPassword(String username, String password) {
         return null;
+    }
+
+    @Override
+    public void updateCustomer(Customer customer) {
+        entityManager.refresh(customer);
+        entityManager.close();
     }
 }

@@ -1,15 +1,16 @@
 package org.example.data;
 
-import org.example.data.ProductDAO;
 import org.example.data.entities.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import java.util.List;
 
 @Repository
@@ -25,6 +26,7 @@ public class ProductDAOImpl implements ProductDAO {
     public void save(Product product) {
         Session session = getSession();
         session.save(product);
+
         session.close();
     }
 
@@ -33,17 +35,16 @@ public class ProductDAOImpl implements ProductDAO {
         try (Session session = getSession()) {
             Query from_product = session.createQuery("from Product");
             List<Product> list = from_product.list();
-            session.close();
             return list;
         }
     }
 
     @Override
-    public void delete(int id) {
-        Session session = getSession();
-        Product p = session.get(Product.class, id);
-        session.delete(p);
-        session.flush();
+    @Transactional
+    public void delete(long productId) {
+        Product product = entityManager.find(Product.class, productId);
+        entityManager.remove(product);
+        entityManager.flush();
     }
 
     @Override
@@ -53,9 +54,22 @@ public class ProductDAOImpl implements ProductDAO {
         return product;
     }
 
+    @Override
+    public List<Product> getAllProductByCategory(int pageNumber, String productCategory) {
+        return entityManager.createQuery("FROM Product p WHERE p.productCategory = :category").setParameter("category", productCategory).getResultList();
+    }
+
     public Session getSession() {
         return sessionFactory.openSession();
     }
 
+    @Override
+    public void update(Product product)  {
+//       Session session = sessionFactory.getCurrentSession();
+//        session.update(product);
+//        session.close();
 
+        entityManager.merge(product);
+        entityManager.close();
+    }
 }

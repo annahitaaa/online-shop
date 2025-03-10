@@ -1,8 +1,6 @@
 package org.example.data.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.example.validators.Phone;
 
 import javax.persistence.*;
@@ -12,7 +10,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Customer extends Audit implements Serializable {
@@ -44,9 +43,6 @@ public class Customer extends Audit implements Serializable {
 
     private Boolean enabled;
 
-    @OneToOne(mappedBy = "customer")
-    private Cart cart;
-
     @Valid
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "shippingAddressId")
@@ -56,5 +52,9 @@ public class Customer extends Audit implements Serializable {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "billingAddressId")
     private BillingAddress billingAddress;
+
+    @OneToOne
+    @JoinColumn(name="cartId")
+    private Cart cart;
 
 }
