@@ -1,7 +1,6 @@
 package org.example.config;
 
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/product/**").hasAnyRole("ROLE_ADMIN, ROLE_USERS")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/customer/**").access("hasRole('USER')")
+                .antMatchers("/swagger-ui.html").anonymous()
 
                 .and()
                 .exceptionHandling().accessDeniedPage("/access-denied")

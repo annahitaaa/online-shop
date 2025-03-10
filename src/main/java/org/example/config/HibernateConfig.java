@@ -1,7 +1,7 @@
 package org.example.config;
 
 
-import com.zaxxer.hikari.HikariConfig;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AvailableSettings;
 import org.springframework.beans.factory.annotation.Autowired;

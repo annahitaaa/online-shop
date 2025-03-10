@@ -1,6 +1,7 @@
 package org.example.controllers;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.example.data.entities.*;
 import org.example.exceptions.CustomError;
 import org.example.services.*;
@@ -20,15 +21,15 @@ import java.util.ArrayList;
 import java.util.List;
 @Controller
 @RequestMapping("/admin")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AdminController implements HandlerExceptionResolver {
 
-    @Autowired
-    private ProductService productService;
+
+    private final ProductService productService;
 
 
-    @Autowired
-    private CustomerService customerService;
+
+    private final CustomerService customerService;
 
     @Autowired
     private CustomerOrderService customerOrderService;
